@@ -15,7 +15,7 @@ Personal Project
 - 디펜스 or 생존
 - 플레이어(State Pattern)
 - 적(FSM)
-- 등장하는 무기, 아이템(ScriptableObject)
+- 등장하는 무기, 아이템, 적 정보(ScriptableObject)
 ---
  
 ### 아이디어 2
@@ -26,7 +26,7 @@ Personal Project
 - 암살, 스피드
 - 플레이어(State Pattern)
 - 적(FSM)
-- 등장하는 무기(ScriptableObject)
+- 등장하는 무기, 적 정보(ScriptableObject)
 ---
 
 ### 아이디어 3
