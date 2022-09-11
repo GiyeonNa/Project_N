@@ -14,7 +14,7 @@ public class GroundChecker : MonoBehaviour
     private void Update()
     {
         IsGrounded = Physics.Raycast(point.position, Vector3.down, distance, layerMask);
-        Debug.Log(IsGrounded);
+        
     }
 
     private void OnDrawGizmos()

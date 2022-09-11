@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float jumpTime;
     [SerializeField] private float jumpSpeed;
 
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();

@@ -4,17 +4,39 @@ using UnityEngine;
 
 public class PlayerGunController : MonoBehaviour
 {
-    public BaseGun curGun;
-    // Start is called before the first frame update
-    void Start()
+    //[SerializeField] private BaseGun curGun;
+    //public BaseGun CurGun { get { return curGun; } set { curGun = value; } }
+
+    [SerializeField] GunInventory gunInventory;
+
+    private void Awake()
     {
-        
+        gunInventory = GetComponentInChildren<GunInventory>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) curGun.Shot();
-        if (Input.GetKeyDown(KeyCode.R)) curGun.Reload();
+        if (Input.GetKeyDown(KeyCode.R)) gunInventory.curGun.Reload();
+
+        //if (curGun.currentStyle == GunStyles.automatic)
+        //{
+        //    if (Input.GetButton("Fire1")) curGun.Shot();
+        //}
+        //if(curGun.currentStyle == GunStyles.nonautomatic)
+        //{
+        //    if (Input.GetButtonDown("Fire1")) curGun.Shot(); 
+        //}
+
+        if (gunInventory.curGun.currentStyle == GunStyles.automatic)
+        {
+            if (Input.GetButton("Fire1")) gunInventory.curGun.Shot();
+        }
+        if (gunInventory.curGun.currentStyle == GunStyles.nonautomatic)
+        {
+            if (Input.GetButtonDown("Fire1")) gunInventory.curGun.Shot();
+        }
+
+
     }
 }
