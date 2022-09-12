@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class AR : BaseGun
+public class SR : BaseGun
 {
     private void Awake()
     {

@@ -6,6 +6,11 @@ public enum GunStyles { nonautomatic, automatic }
 public abstract class BaseGun : MonoBehaviour
 {
     public GunStyles currentStyle;
+    public Camera camera;
+    public LayerMask layerMask;
+    public Animator animator;
+    public RaycastHit hit;
+    public ParticleSystem muzzle;
 
     //자체 쿨타임
     public float gunFireRate;
