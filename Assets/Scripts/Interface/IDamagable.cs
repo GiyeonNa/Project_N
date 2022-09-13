@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    void TakeHit(float damage);
+    void TakeHit(float damage, RaycastHit hit);
 }

@@ -8,6 +8,7 @@ public class GunInventory : MonoBehaviour
     public int selectedWeapon = 0;
     //PlayerGunController playerGun = new PlayerGunController();
     public BaseGun curGun;
+    public PlayerUIController playerUIController;
 
     // Start is called before the first frame update
     void Awake()
@@ -63,9 +64,14 @@ public class GunInventory : MonoBehaviour
             {
                 weapon.gameObject.SetActive(true);
                 curGun = weapon.GetComponent<BaseGun>();
+                playerUIController.curGun = curGun;
             }
             else
-                weapon.gameObject.SetActive(false);
+            {
+                //curGun.animator.SetTrigger("Out");
+                weapon.gameObject.SetActive(false);     
+            }
+                
             i++;
         }
     }

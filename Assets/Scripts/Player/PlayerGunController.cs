@@ -19,15 +19,6 @@ public class PlayerGunController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R)) gunInventory.curGun.Reload();
 
-        //if (curGun.currentStyle == GunStyles.automatic)
-        //{
-        //    if (Input.GetButton("Fire1")) curGun.Shot();
-        //}
-        //if(curGun.currentStyle == GunStyles.nonautomatic)
-        //{
-        //    if (Input.GetButtonDown("Fire1")) curGun.Shot(); 
-        //}
-
         if (gunInventory.curGun.currentStyle == GunStyles.automatic)
         {
             if (Input.GetButton("Fire1")) gunInventory.curGun.Shot();
@@ -36,7 +27,5 @@ public class PlayerGunController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1")) gunInventory.curGun.Shot();
         }
-
-
     }
 }

@@ -8,6 +8,12 @@ public class SR : BaseGun
     {
         animator = GetComponent<Animator>();
     }
+
+    private void OnEnable()
+    {
+        onChangeMag?.Invoke();
+    }
+
     private void Update()
     {
         GunFireRateCale();
@@ -16,23 +22,28 @@ public class SR : BaseGun
     {
         totalMagazine -= (reloadMagazine - curMagazine);
         curMagazine = reloadMagazine;
+        onChangeMag?.Invoke();
     }
     public override void Shot()
     {
         if (curFireRate > 0) return;
         animator.SetTrigger("Shot");
-        muzzle.Play();
         curFireRate = gunFireRate;
         curMagazine -= 1;
+        onChangeMag?.Invoke();
         //단발 연발로 바꾸기
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, layerMask))
         {
             Debug.Log(hit.transform.gameObject.name);
             IDamagable target = hit.transform.GetComponent<IDamagable>();
-            target?.TakeHit(damage);
+            target?.TakeHit(damage, hit);
 
         }
 
-        Debug.Log("Shot");
+    }
+
+    public void MuzzlePlay()
+    {
+        muzzle.Play();
     }
 }
