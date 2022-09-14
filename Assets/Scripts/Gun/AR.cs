@@ -14,6 +14,7 @@ public class AR : BaseGun
 
     private void OnEnable()
     {
+        Debug.Log("AR IN");
         onChangeMag?.Invoke();
     }
 

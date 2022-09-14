@@ -5,16 +5,24 @@ using TMPro;
 
 public class PlayerUIController : MonoBehaviour
 {
-    [SerializeField] public BaseGun curGun;
+    [SerializeField] public GunInventory gunInventory;
+    [SerializeField] public BaseGun UIcurGun;
     [SerializeField] private TextMeshProUGUI magText;
 
-    private void Awake()
+
+    private void Start()
     {
-        curGun.onChangeMag += OnChangePlayerMag;
+        UIcurGun = gunInventory.curGun;
+        UIcurGun.onChangeMag += OnChangePlayerMag;
     }
-    
+
+    private void Update()
+    {
+        UIcurGun = gunInventory.curGun;
+    }
+
     void OnChangePlayerMag()
     {
-        magText.SetText(curGun.curMagazine + " / " + curGun.totalMagazine);
+        magText.SetText(UIcurGun.curMagazine + " / " + UIcurGun.totalMagazine);
     }
 }

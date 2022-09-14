@@ -65,6 +65,7 @@ namespace MeleeEnemyState
                 Owner.tempTarget = target[0].transform;
                 Owner.Agent.SetDestination(Owner.tempTarget.position);
             }
+            
             if (Owner.Agent.remainingDistance < Owner.Agent.stoppingDistance) 
                 Owner.ChangeState(Enemy.State.Attack);
             
@@ -88,6 +89,7 @@ namespace MeleeEnemyState
 
         public override void Update(Enemy Owner)
         {
+            //플레이어가 멀어졌을 경우도 계산해야함   
             if (Owner.tempTarget == null)
             {
                 Owner.ChangeState(Enemy.State.Trace);
