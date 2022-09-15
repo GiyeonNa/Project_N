@@ -11,6 +11,7 @@ public class SR : BaseGun
 
     private void OnEnable()
     {
+        Debug.Log("SR in");
         onChangeMag?.Invoke();
     }
 

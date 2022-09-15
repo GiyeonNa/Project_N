@@ -12,23 +12,25 @@ public class AR : BaseGun
         animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
-    {
-        Debug.Log("AR IN");
-        onChangeMag?.Invoke();
-    }
-
     private void Update()
     {
         GunFireRateCale();
     }
+
+    private void OnEnable()
+    {
+        onChangeMag?.Invoke();
+    }
+
     public override void Reload()
     {
+        if (totalMagazine <= 0) return;
         totalMagazine -= (reloadMagazine - curMagazine);
         curMagazine = reloadMagazine;
         animator.SetTrigger("Reload");
         onChangeMag?.Invoke();
     }
+
     public override void Shot()
     {
         if (curFireRate > 0) return;
@@ -39,7 +41,7 @@ public class AR : BaseGun
         curFireRate = gunFireRate;
         curMagazine -= 1;
         onChangeMag?.Invoke();
-        //단발 연발로 바꾸기
+
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, layerMask))
         {
             //Debug.Log(hit.transform.gameObject.name);

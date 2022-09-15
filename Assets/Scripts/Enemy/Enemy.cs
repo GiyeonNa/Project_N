@@ -12,10 +12,12 @@ public class Enemy : MonoBehaviour, IDamagable
     public float hp;
     public float Hp { get { return hp;} set { hp = value; } }
 
-    private float damage;
+    public float damage;
     public float Damage { get { return damage;} set { damage = value; } }
 
-    [SerializeField, Range(0,10)] public float atkRange;
+    public float destoryTime;
+
+    [SerializeField, Range(0,10)] public float attackRange;
     [SerializeField, Range(0, 10)] public float searchRange;
 
     private Animator animator;
@@ -25,9 +27,9 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public ParticleSystem bloodParticle;
     public CapsuleCollider capsuleCollider;
-    public float destoryTime;
     public Transform target;
     public Transform tempTarget;
+    public Collider attackArea;
     public LayerMask layerMask;
 
     // Update is called once per frame
@@ -44,7 +46,7 @@ public class Enemy : MonoBehaviour, IDamagable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, atkRange);
+        Gizmos.DrawWireSphere(this.transform.position, attackRange);
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(this.transform.position, searchRange);
@@ -65,5 +67,10 @@ public class Enemy : MonoBehaviour, IDamagable
     public void Dead()
     {
         Destroy(gameObject, destoryTime);
+    }
+
+    public void ObjectTakeHit()
+    {
+        return;
     }
 }

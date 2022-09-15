@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GunInventory : MonoBehaviour
 {
-    public int selectedWeapon = 0;
+    public int selectedWeapon = 0;  
     public BaseGun curGun;
 
     // Start is called before the first frame update
@@ -61,12 +61,14 @@ public class GunInventory : MonoBehaviour
             if (i == selectedWeapon)
             {
                 weapon.gameObject.SetActive(true);
+
                 curGun = weapon.GetComponent<BaseGun>();
-                
+                curGun.onChangeMag?.Invoke();
+
+
             }
             else
             {
-                //curGun.animator.SetTrigger("Out");
                 weapon.gameObject.SetActive(false);     
             }
                 

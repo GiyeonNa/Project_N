@@ -5,24 +5,32 @@ using TMPro;
 
 public class PlayerUIController : MonoBehaviour
 {
-    [SerializeField] public GunInventory gunInventory;
-    [SerializeField] public BaseGun UIcurGun;
+    [SerializeField] public GunInventory plyaerGunInventory;
+    //[SerializeField] public BaseGun UIcurGun;
     [SerializeField] private TextMeshProUGUI magText;
 
-
+ 
     private void Start()
     {
-        UIcurGun = gunInventory.curGun;
-        UIcurGun.onChangeMag += OnChangePlayerMag;
+        //UIcurGun = plyaerGunInventory.curGun;
+        //UIcurGun.onChangeMag += OnChangePlayerMag;
+        plyaerGunInventory.curGun.onChangeMag += OnChangePlayerMag;
+        
+        plyaerGunInventory.curGun.onChangeMag?.Invoke();
     }
 
     private void Update()
     {
-        UIcurGun = gunInventory.curGun;
+        if(plyaerGunInventory.curGun.onChangeMag == null)
+        {
+            plyaerGunInventory.curGun.onChangeMag += OnChangePlayerMag;
+            plyaerGunInventory.curGun.onChangeMag?.Invoke();
+        }
     }
 
     void OnChangePlayerMag()
     {
-        magText.SetText(UIcurGun.curMagazine + " / " + UIcurGun.totalMagazine);
+        Debug.Log("OnCahngePlayerMag");
+        magText.SetText(plyaerGunInventory.curGun.curMagazine + " / " + plyaerGunInventory.curGun.totalMagazine);
     }
 }

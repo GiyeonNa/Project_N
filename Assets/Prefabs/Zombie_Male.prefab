@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 1638918792}
   m_Layer: 8
   m_Name: Zombie_Male
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -885,7 +885,7 @@ MonoBehaviour:
   tempTarget: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 576
 --- !u!136 &1638918792
 CapsuleCollider:
   m_ObjectHideFlags: 0

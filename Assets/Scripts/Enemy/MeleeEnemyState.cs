@@ -40,7 +40,6 @@ namespace MeleeEnemyState
 
         public override void Exit(Enemy Owner)
         {
-            Debug.Log("Idle Exit");
         }
     }
 
@@ -48,7 +47,6 @@ namespace MeleeEnemyState
     {
         public override void Enter(Enemy Owner)
         {
-            Debug.Log("Trace Enter");
             if (Owner.tempTarget == null) Owner.tempTarget = Owner.target;
             Owner.Agent.SetDestination(Owner.tempTarget.position);
             //Owner.Animator.SetLayerWeight(1, 0f);
@@ -73,7 +71,6 @@ namespace MeleeEnemyState
 
         public override void Exit(Enemy Owner)
         {
-            Debug.Log("Trace Exit");
             Owner.Agent.isStopped = true;
             Owner.Animator.SetBool("Run", false);
         }
@@ -83,7 +80,6 @@ namespace MeleeEnemyState
     {
         public override void Enter(Enemy Owner)
         {
-            Debug.Log("Attack Enter");
             Owner.Animator.SetBool("Attack", true);
         }
 
@@ -98,7 +94,6 @@ namespace MeleeEnemyState
 
         public override void Exit(Enemy Owner)
         {
-            Debug.Log("Attack Exit");
             Owner.Animator.SetBool("Attack", false);
         }
     }

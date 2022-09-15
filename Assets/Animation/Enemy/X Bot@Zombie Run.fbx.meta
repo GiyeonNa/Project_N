@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2a4806a061af3bc48bf0313fddbaa746
+guid: c7d5f15c41cd16e4d87f7139b1c6101d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: ZombieReaction
+    second: Zombie Run
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ZombieReaction
+      name: Zombie Run
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

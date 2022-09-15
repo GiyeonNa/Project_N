@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
-
-
+    public Transform atkPos;
+    public float atkarea;
     private void Awake()
     {
         Animator = GetComponent<Animator>();
@@ -33,6 +33,34 @@ public class MeleeEnemy : Enemy
         Animator.SetTrigger("Hit");
         if (Hp <= 0) stateMachine.ChangeState(State.Die);
         //stateMachine.ChangeState(State.Hit);
+    }
+
+    public void AttackAreaOn()
+    {
+        attackArea.enabled = true;
+    }
+
+    public void AttackAreaOff()
+    {
+        attackArea.enabled = false;
+    }
+
+    public void OverLap()
+    {
+        RaycastHit hit;
+        Collider[] targets =  Physics.OverlapSphere(atkPos.position, atkarea, layerMask);
+        if (targets.Length > 0)
+        {
+            IDamagable asdf = targets[0].GetComponent<IDamagable>();
+            asdf?.TakeHit();
+
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(atkPos.position, atkarea);
     }
 
 
