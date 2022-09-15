@@ -47,7 +47,7 @@ namespace MeleeEnemyState
     {
         public override void Enter(Enemy Owner)
         {
-            if (Owner.tempTarget == null) Owner.tempTarget = Owner.target;
+            Owner.tempTarget = Owner.target;
             Owner.Agent.SetDestination(Owner.tempTarget.position);
             //Owner.Animator.SetLayerWeight(1, 0f);
             Owner.Animator.SetBool("Run", true);
@@ -85,11 +85,14 @@ namespace MeleeEnemyState
 
         public override void Update(Enemy Owner)
         {
+            
             //플레이어가 멀어졌을 경우도 계산해야함   
-            if (Owner.tempTarget == null)
+            if (Owner.tempTarget == null || Vector3.Distance(Owner.transform.position, Owner.tempTarget.position) > Owner.searchRange)
             {
                 Owner.ChangeState(Enemy.State.Trace);
             }
+            //Debug.Log(Vector3.Distance(Owner.transform.position ,Owner.tempTarget.position));
+
         }
 
         public override void Exit(Enemy Owner)

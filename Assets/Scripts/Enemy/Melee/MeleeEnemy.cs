@@ -7,6 +7,8 @@ public class MeleeEnemy : Enemy
 {
     public Transform atkPos;
     public float atkarea;
+    public Collider attackArea;
+
     private void Awake()
     {
         Animator = GetComponent<Animator>();
@@ -47,13 +49,11 @@ public class MeleeEnemy : Enemy
 
     public void OverLap()
     {
-        RaycastHit hit;
         Collider[] targets =  Physics.OverlapSphere(atkPos.position, atkarea, layerMask);
         if (targets.Length > 0)
         {
-            IDamagable asdf = targets[0].GetComponent<IDamagable>();
-            asdf?.TakeHit();
-
+            targets[0].GetComponent<IDamagable>().TakeHit(Damage);
+            //IDamagable firstTarget = targets[0].GetComponent<IDamagable>();
         }
     }
 
@@ -61,7 +61,12 @@ public class MeleeEnemy : Enemy
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(atkPos.position, atkarea);
-    }
 
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, attackRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, searchRange);
+    }
 
 }

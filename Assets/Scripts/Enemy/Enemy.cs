@@ -26,10 +26,9 @@ public class Enemy : MonoBehaviour, IDamagable
     public NavMeshAgent Agent { get { return agent; }  set { agent = value; } }
 
     public ParticleSystem bloodParticle;
-    public CapsuleCollider capsuleCollider;
+    public Collider capsuleCollider;
     public Transform target;
     public Transform tempTarget;
-    public Collider attackArea;
     public LayerMask layerMask;
 
     // Update is called once per frame
@@ -43,14 +42,6 @@ public class Enemy : MonoBehaviour, IDamagable
         stateMachine.ChangeState(nextState);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, attackRange);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, searchRange);
-    }
 
     public virtual void TakeHit(float damage, RaycastHit hit)
     {
@@ -69,7 +60,8 @@ public class Enemy : MonoBehaviour, IDamagable
         Destroy(gameObject, destoryTime);
     }
 
-    public void ObjectTakeHit()
+
+    public void TakeHit(float damage)
     {
         return;
     }

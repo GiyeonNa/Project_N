@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Barricade : MonoBehaviour, IDamagable
 {
-    public void ObjectTakeHit()
+    [SerializeField] float hp;
+
+    public void TakeHit(float damage)
     {
-        Debug.Log("건물 맞음");
+        Debug.Log(damage + " 만큼 피해를 입음");
+        hp -= damage;
+        if (hp <= 0)
+        {
+
+            Destroy(gameObject);
+        }
     }
 
     public void TakeHit(float damage, RaycastHit hit)
     {
         return;
     }
+
+
+
+  
 }

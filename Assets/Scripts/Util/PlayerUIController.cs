@@ -30,7 +30,6 @@ public class PlayerUIController : MonoBehaviour
 
     void OnChangePlayerMag()
     {
-        Debug.Log("OnCahngePlayerMag");
         magText.SetText(plyaerGunInventory.curGun.curMagazine + " / " + plyaerGunInventory.curGun.totalMagazine);
     }
 }

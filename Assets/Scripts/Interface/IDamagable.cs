@@ -6,5 +6,5 @@ public interface IDamagable
 {
     void TakeHit(float damage, RaycastHit hit);
 
-    void ObjectTakeHit();
+    void TakeHit(float damage);
 }

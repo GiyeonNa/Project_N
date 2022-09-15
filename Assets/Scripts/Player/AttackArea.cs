@@ -8,7 +8,6 @@ public class AttackArea : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamagable target = other.GetComponent<IDamagable>();
-        target?.ObjectTakeHit();
-        
+       
     }
 }
