@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour, IDamagable
     public Transform target;
     public Transform tempTarget;
     public LayerMask layerMask;
+    public GameObject rootItem;
 
     // Update is called once per frame
     private void Update()
@@ -57,6 +58,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void Dead()
     {
+        Instantiate(rootItem, transform.position, transform.rotation);
         Destroy(gameObject, destoryTime);
     }
 

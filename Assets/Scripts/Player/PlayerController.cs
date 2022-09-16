@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     private CharacterController characterController;
     [SerializeField] private GroundChecker groundChecker;
@@ -19,6 +19,16 @@ public class PlayerController : MonoBehaviour
     private float jumpTime;
     [SerializeField] private float jumpSpeed;
 
+    [SerializeField] private float hp;
+    public float Hp
+    {
+        get { return hp; }
+        set 
+        { 
+            hp = value;
+            if (hp <= 0) Debug.Log("Dead");
+        }
+    }
 
     private void Awake()
     {
@@ -74,6 +84,18 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Vector3.up * moveY * Time.deltaTime);
     }
 
-   
+    public void TakeHit(float damage, RaycastHit hit)
+    {
+        return;
+    }
 
+    public void TakeHit(float damage)
+    {
+        Hp -= damage;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.GetComponent<DropItem>().PickUp();
+    }
 }

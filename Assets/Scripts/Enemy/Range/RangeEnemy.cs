@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class RangeEnemy : Enemy
 {
+    public Transform attackPos;
+    public GameObject projectile;
+
     private void Awake()
     {
         Animator = GetComponent<Animator>();
@@ -35,7 +38,8 @@ public class RangeEnemy : Enemy
 
     public void RangeAttack()
     {
-        Debug.Log("Attack");
+        Instantiate(projectile, attackPos.position, attackPos.rotation, transform);
+        transform.LookAt(tempTarget);
     }
 
     private void OnDrawGizmos()
@@ -46,4 +50,6 @@ public class RangeEnemy : Enemy
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(this.transform.position, searchRange);
     }
+
+
 }

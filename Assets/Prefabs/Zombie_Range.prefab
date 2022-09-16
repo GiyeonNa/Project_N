@@ -880,8 +880,8 @@ MonoBehaviour:
   hp: 20
   damage: 10
   destoryTime: 3.5
-  attackRange: 4
-  searchRange: 5.5
+  attackRange: 6.5
+  searchRange: 9
   bloodParticle: {fileID: 198107820186352126, guid: b369efb4abe69e044890b664115fab9e, type: 3}
   capsuleCollider: {fileID: 0}
   target: {fileID: 0}
@@ -889,6 +889,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 576
+  firingAngle: 45
+  gravity: 30
+  projectile: {fileID: 8844049458460685739, guid: f2add68f80e25954c8faa91ffaca0f09, type: 3}
 --- !u!1 &6078312334089617884
 GameObject:
   m_ObjectHideFlags: 0

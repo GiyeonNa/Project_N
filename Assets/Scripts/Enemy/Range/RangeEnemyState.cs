@@ -80,7 +80,7 @@ namespace RangeEnemyState
 
         public override void Update(Enemy Owner)
         {
-
+            //Owner.transform.LookAt(Owner.tempTarget);
             //플레이어가 멀어졌을 경우도 계산해야함   
             if (Owner.tempTarget == null || Vector3.Distance(Owner.transform.position, Owner.tempTarget.position) > Owner.searchRange)
             {
