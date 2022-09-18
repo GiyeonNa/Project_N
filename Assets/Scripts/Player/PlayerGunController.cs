@@ -18,15 +18,26 @@ public class PlayerGunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) gunInventory.curGun.Reload();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!gunInventory.curGun.isReloading)
+            {
+                StartCoroutine(gunInventory.curGun.Reload());
+            }
+            
+        }
 
-        if (gunInventory.curGun.currentStyle == GunStyles.automatic)
+        if (!gunInventory.curGun.isReloading)
         {
-            if (Input.GetButton("Fire1")) gunInventory.curGun.Shot();
+            if (gunInventory.curGun.currentStyle == GunStyles.automatic)
+            {
+                if (Input.GetButton("Fire1")) gunInventory.curGun.Shot();
+            }
+            if (gunInventory.curGun.currentStyle == GunStyles.nonautomatic)
+            {
+                if (Input.GetButtonDown("Fire1")) gunInventory.curGun.Shot();
+            }
         }
-        if (gunInventory.curGun.currentStyle == GunStyles.nonautomatic)
-        {
-            if (Input.GetButtonDown("Fire1")) gunInventory.curGun.Shot();
-        }
+        
     }
 }

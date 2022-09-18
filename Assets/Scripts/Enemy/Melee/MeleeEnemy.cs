@@ -7,7 +7,6 @@ public class MeleeEnemy : Enemy
 {
     public Transform atkPos;
     public float atkarea;
-    public Collider attackArea;
 
     private void Awake()
     {
@@ -37,24 +36,11 @@ public class MeleeEnemy : Enemy
         //stateMachine.ChangeState(State.Hit);
     }
 
-    public void AttackAreaOn()
-    {
-        attackArea.enabled = true;
-    }
-
-    public void AttackAreaOff()
-    {
-        attackArea.enabled = false;
-    }
-
     public void OverLap()
     {
         Collider[] targets =  Physics.OverlapSphere(atkPos.position, atkarea, layerMask);
-        if (targets.Length > 0)
-        {
-            targets[0].GetComponent<IDamagable>().TakeHit(Damage);
-            //IDamagable firstTarget = targets[0].GetComponent<IDamagable>();
-        }
+        IDamagable target = targets[0].GetComponent<IDamagable>();
+        target?.TakeHit(Damage);
     }
 
     private void OnDrawGizmos()

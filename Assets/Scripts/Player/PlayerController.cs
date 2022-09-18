@@ -20,14 +20,32 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] private float jumpSpeed;
 
     [SerializeField] private float hp;
+
     public float Hp
     {
         get { return hp; }
         set 
         { 
             hp = value;
+            if (Hp > 100) Hp = 100;
+            GameManager.Instance.PlayerUIController.OnChangePlayerHp();
             if (hp <= 0) Debug.Log("Dead");
+            
         }
+    }
+    [SerializeField] private int money;
+
+    public int Money 
+    {  
+        get 
+        { 
+            return money; 
+        } 
+        set 
+        { 
+            money = value;
+            GameManager.Instance.PlayerUIController.OnChangePlayerMoney();
+        }  
     }
 
     private void Awake()
@@ -96,6 +114,6 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<DropItem>().PickUp();
+        other.gameObject.GetComponent<DropItemController>().PickUp();
     }
 }

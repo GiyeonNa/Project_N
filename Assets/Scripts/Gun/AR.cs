@@ -22,12 +22,14 @@ public class AR : BaseGun
         onChangeMag?.Invoke();
     }
 
-    public override void Reload()
+    public override IEnumerator Reload()
     {
-        if (totalMagazine <= 0) return;
+        isReloading = true;
+        animator.SetTrigger("Reload");
+        yield return new WaitForSeconds(reloadTime);
+        isReloading = false;
         totalMagazine -= (reloadMagazine - curMagazine);
         curMagazine = reloadMagazine;
-        animator.SetTrigger("Reload");
         onChangeMag?.Invoke();
     }
 

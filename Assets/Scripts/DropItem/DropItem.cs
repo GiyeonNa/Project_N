@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class DropItem : MonoBehaviour,IPickUpable
+public abstract class DropItem : ScriptableObject
 {
-    [SerializeField] protected Collider pickupRange;
+    public enum Type { Food, Ammo, Money}
+    public Type type;
+    public string name;
+    public int amount;
+    public GameObject prefab;
 
-    private void Awake()
-    {
-        pickupRange = GetComponent<Collider>();
-    }
-
-    public virtual void PickUp()
-    {
-        Destroy(gameObject);
-    }
+    public abstract void Drop(Transform transform);
+    
 }

@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour, IDamagable
     public LayerMask layerMask;
     public GameObject rootItem;
 
+    public DropItem[] dropItem;
+    public Transform dropItemPos;
+
     // Update is called once per frame
     private void Update()
     {
@@ -58,7 +61,11 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void Dead()
     {
-        Instantiate(rootItem, transform.position, transform.rotation);
+        int num = Random.Range(0, dropItem.Length);
+        Debug.Log("Drop" + num);
+        dropItem[num].Drop(dropItemPos);
+
+        //Instantiate(rootItem, transform.position, transform.rotation);
         Destroy(gameObject, destoryTime);
     }
 

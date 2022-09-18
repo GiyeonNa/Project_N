@@ -6,10 +6,12 @@ using TMPro;
 public class PlayerUIController : MonoBehaviour
 {
     [SerializeField] public GunInventory plyaerGunInventory;
-    //[SerializeField] public BaseGun UIcurGun;
-    [SerializeField] private TextMeshProUGUI magText;
 
- 
+    [SerializeField] private TextMeshProUGUI magText;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI hpText;
+
+
     private void Start()
     {
         //UIcurGun = plyaerGunInventory.curGun;
@@ -32,4 +34,16 @@ public class PlayerUIController : MonoBehaviour
     {
         magText.SetText(plyaerGunInventory.curGun.curMagazine + " / " + plyaerGunInventory.curGun.totalMagazine);
     }
+
+    public void OnChangePlayerMoney()
+    {
+        moneyText.SetText("Money : " + GameManager.Instance.PlayerController.Money.ToString());
+    }
+
+    public void OnChangePlayerHp()
+    {
+        hpText.SetText("HP : " + GameManager.Instance.PlayerController.Hp.ToString());
+    }
+
+
 }

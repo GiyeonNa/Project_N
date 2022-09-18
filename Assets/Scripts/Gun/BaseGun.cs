@@ -25,8 +25,11 @@ public abstract class BaseGun : MonoBehaviour
     public int curMagazine;
     public int reloadMagazine;
 
+    public float reloadTime;
+    public bool isReloading;
+
     public abstract void Shot();
-    public abstract void Reload();
+    public abstract IEnumerator Reload();
 
     public virtual void GunFireRateCale()
     {
