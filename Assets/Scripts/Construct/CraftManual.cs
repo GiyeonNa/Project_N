@@ -26,7 +26,8 @@ public class CraftManual : MonoBehaviour
     private RaycastHit hit;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float range;
-
+    [SerializeField] private float rotateSpeed;
+    
     public void SlotClick(int slotNumber)
     {
         preview = Instantiate(craft[slotNumber].preViewPrefab, player.position + player.forward, Quaternion.identity);
@@ -40,6 +41,7 @@ public class CraftManual : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (Input.GetKeyDown(KeyCode.Tab) && !isPreViewAct)
         {
             Debug.Log("Show");
@@ -50,23 +52,40 @@ public class CraftManual : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1")) Build();
 
-        if(Input.GetKeyDown(KeyCode.C)) Rotate();
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
+        {
+            if (Input.GetKey(KeyCode.Q)) Rotate(KeyCode.Q);
+            if (Input.GetKey(KeyCode.E)) Rotate(KeyCode.E);
+        }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Cancel();
+        //if (Input.GetKeyDown(KeyCode.Escape)) Cancel();
+
+        if (Input.GetButtonDown("Fire2")) Cancel();
+
     }
 
-    private void Rotate()
+    private void Rotate(KeyCode key)
     {
         if (isPreViewAct)
         {
-            preview.transform.Rotate(Vector3.up * 90);
+            switch (key){
+                case KeyCode.Q:
+                    preview.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+                    break;
+                case KeyCode.E:
+                    preview.transform.Rotate(Vector3.up * -rotateSpeed * Time.deltaTime);
+                    break;
+            }
+            
+            //preview.transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * Time.deltaTime);
+
         }
+        
     }
 
     private void Build()
     {
-        if (isPreViewAct)
+        if (isPreViewAct && preview.GetComponent<PreViewObject>().isBuildable())
         {
             Instantiate(prefab, hit.point, preview.transform.rotation);
             Destroy(preview);

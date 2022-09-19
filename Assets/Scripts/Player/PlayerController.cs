@@ -114,6 +114,11 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<DropItemController>().PickUp();
+        if (other.gameObject.GetComponent<DropItemController>())
+        {
+            Debug.Log("Pick Up");
+            other.gameObject.GetComponent<DropItemController>().PickUp();
+        }
+
     }
 }

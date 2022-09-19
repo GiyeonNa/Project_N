@@ -329,6 +329,8 @@ MonoBehaviour:
   totalMagazine: 30
   curMagazine: 5
   reloadMagazine: 5
+  reloadTime: 0
+  isReloading: 0
 --- !u!95 &5693315564653187435
 Animator:
   serializedVersion: 4
@@ -339,7 +341,7 @@ Animator:
   m_GameObject: {fileID: 5756652245729081488}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71f598b82d2a3474a8bb22d39b7bb4c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -651,6 +653,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198076924919084778, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198076924919084778, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198673632737434412, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198673632737434412, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199368111847782378, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}

@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float damage;
     public ParticleSystem particle;
+    [SerializeField] private bool isHit;
     private void Awake()
     {
         damage = GetComponentInParent<Enemy>().Damage;
@@ -25,6 +26,9 @@ public class Projectile : MonoBehaviour
 
     private void OnParticleTrigger()
     {
-        Debug.Log("hit");
+        if (isHit) return;
+        Debug.Log("Particle hit");
+        isHit = true;
+        //피해를 주어야함, 어떻게 전달?
     }
 }

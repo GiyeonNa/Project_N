@@ -7,7 +7,7 @@ public abstract class DropItem : ScriptableObject
 {
     public enum Type { Food, Ammo, Money}
     public Type type;
-    public string name;
+    public string objName;
     public int amount;
     public GameObject prefab;
 
