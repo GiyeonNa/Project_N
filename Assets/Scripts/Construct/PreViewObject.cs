@@ -45,6 +45,7 @@ public class PreViewObject : MonoBehaviour
         foreach(Transform child in transform)
         {
             Debug.Log("Have Child");
+            
             var newMaterial = new Material[child.GetComponent<Renderer>().materials.Length];
             for(int i=0; i<newMaterial.Length; i++)
             {

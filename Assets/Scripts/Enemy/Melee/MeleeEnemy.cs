@@ -39,8 +39,11 @@ public class MeleeEnemy : Enemy
     public void OverLap()
     {
         Collider[] targets =  Physics.OverlapSphere(atkPos.position, atkarea, layerMask);
-        IDamagable target = targets[0].GetComponent<IDamagable>();
-        target?.TakeHit(Damage);
+        for(int i=0; i<targets.Length; i++)
+        {
+            IDamagable target = targets[i].GetComponent<IDamagable>();
+            target?.TakeHit(Damage);
+        }
     }
 
     private void OnDrawGizmos()

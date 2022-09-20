@@ -6,29 +6,29 @@ public class Projectile : MonoBehaviour
 {
     public float damage;
     public ParticleSystem particle;
+    
     [SerializeField] private bool isHit;
+
     private void Awake()
     {
         damage = GetComponentInParent<Enemy>().Damage;
+        particle = GetComponent<ParticleSystem>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnParticleCollision(GameObject other)
     {
-        if (other.gameObject.layer == 7) Destroy(gameObject);
-        if (other.gameObject.layer == 6 || other.gameObject.layer == 9)
-        {
-            IDamagable othertarget = other.GetComponent<IDamagable>();
-            othertarget?.TakeHit(damage);
-            Debug.Log("Get Hit");
-            Destroy(gameObject);
-        }
-
+        IDamagable target = other.GetComponent<IDamagable>();
+        target?.TakeHit(damage);
     }
 
-    private void OnParticleTrigger()
-    {
-        if (isHit) return;
-        Debug.Log("Particle hit");
-        isHit = true;
-        //피해를 주어야함, 어떻게 전달?
-    }
+    //private void OnParticleTrigger()
+    //{
+    //    //Triggers 옵션ㅇ ㅣ켜져있어야함
+    //    if (isHit) return;
+    //    Debug.Log("Particle hit");
+    //    isHit = true;
+    //    //피해를 주어야함, 어떻게 전달?
+
+    //}
+
+   
 }

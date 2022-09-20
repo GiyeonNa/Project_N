@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviour, IDamagable
 {
     // target the gun will aim at
     [SerializeField] private Transform go_target;
@@ -29,15 +29,21 @@ public class Turret : MonoBehaviour
 
     Vector3 plusVec = new Vector3(0, 0.5f, 0);
 
+    [SerializeField] private float damage;
+    [SerializeField] private float coolDown;
+    [SerializeField] private float hp;
+
+
     void Start()
     {
         // Set the firing range distance
-        this.GetComponent<SphereCollider>().radius = firingRange;
+        //this.GetComponent<SphereCollider>().radius = firingRange;
     }
 
     void Update()
     {
         AimAndFire();
+        //if (go_target != null) Debug.Log(go_target.transform.position);
     }
 
     void OnDrawGizmosSelected()
@@ -45,6 +51,10 @@ public class Turret : MonoBehaviour
         // Draw a red sphere at the transform's position to show the firing range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, firingRange);
+
+        //Gizmos.color = Color.blue;
+        //if(go_target != null)
+        //    Gizmos.DrawLine(this.transform.position + plusVec, go_target.transform.position + plusVec);
     }
 
     
@@ -52,7 +62,8 @@ public class Turret : MonoBehaviour
     void AimAndFire()
     {
         Collider[] targets =  Physics.OverlapSphere(this.transform.position, firingRange, layerMask);
-        if(targets.Length > 0)
+        
+        if (targets.Length > 0)
         {
             canFire = true;
             go_target = targets[0].transform;
@@ -74,7 +85,7 @@ public class Turret : MonoBehaviour
 
             // aim at enemy
             Vector3 baseTargetPostition = new Vector3(go_target.position.x, this.transform.position.y, go_target.position.z);
-            Vector3 gunBodyTargetPostition = new Vector3(go_target.position.x, go_target.position.y, go_target.position.z);
+            Vector3 gunBodyTargetPostition = new Vector3(go_target.position.x, go_target.position.y + 0.5f, go_target.position.z);
 
             go_baseRotation.transform.LookAt(baseTargetPostition);
             go_GunBody.transform.LookAt(gunBodyTargetPostition);
@@ -83,6 +94,8 @@ public class Turret : MonoBehaviour
             if (!muzzelFlash.isPlaying)
             {
                 muzzelFlash.Play();
+                Debug.Log("Start Coroutine");
+                StartCoroutine(CoAttack(coolDown));
             }
         }
         else
@@ -94,7 +107,40 @@ public class Turret : MonoBehaviour
             if (muzzelFlash.isPlaying)
             {
                 muzzelFlash.Stop();
+                StopCoroutine(CoAttack(0));
             }
         }
+    }
+
+    IEnumerator CoAttack(float cooldown)
+    {
+        //go_target.gameObject.GetComponent<Enemy>().TakeHit(damage);
+        //Debug.Log(go_target.gameObject.GetComponent<Enemy>().Hp + "남음");
+        Ray ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
+        Debug.DrawRay(this.transform.position, go_target.transform.position - this.transform.position, Color.red);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit)) go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
+        //if (Physics.Raycast(this.transform.position, go_target.transform.position, out hit, firingRange))
+        //{
+        //    Debug.Log(hit.transform.name);
+        //    Debug.Log("Get Hit");
+        //    //go_target.gameObject.GetComponent<Enemy>().TakeHit(damage);
+        //    yield return new WaitForSeconds(cooldown);
+        //    StartCoroutine(CoAttack(cooldown));
+        //}
+        yield return new WaitForSeconds(cooldown);
+        StartCoroutine(CoAttack(cooldown));
+    }
+
+    public void TakeHit(float damage, RaycastHit hit)
+    {
+        return;
+    }
+
+    public void TakeHit(float damage)
+    {
+        hp -= damage;
+        Debug.Log(damage + "를 입음");
+        if (hp <= 0) Destroy(gameObject, 1f);
     }
 }
