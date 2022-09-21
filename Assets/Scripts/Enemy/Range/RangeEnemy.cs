@@ -24,7 +24,7 @@ public class RangeEnemy : Enemy
         stateMachine.AddState(State.Hit, new RangeEnemyState.HitState());
         stateMachine.AddState(State.Die, new RangeEnemyState.DieState());
 
-        stateMachine.ChangeState(State.Idle);
+        stateMachine.ChangeState(State.Trace);
     }
 
     public override void TakeHit(float damage, RaycastHit hit)

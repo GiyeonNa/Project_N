@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour, IDamagable
     public Transform target;
     public Transform tempTarget;
     public LayerMask layerMask;
-    public GameObject rootItem;
 
     public DropItem[] dropItem;
     public Transform dropItemPos;
@@ -66,7 +65,6 @@ public class Enemy : MonoBehaviour, IDamagable
         Debug.Log("Drop" + num);
         dropItem[num].Drop(dropItemPos);
 
-        //Instantiate(rootItem, transform.position, transform.rotation);
         Destroy(gameObject, destoryTime);
     }
 

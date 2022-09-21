@@ -19,6 +19,7 @@ public class PlayerUIController : MonoBehaviour
         plyaerGunInventory.curGun.onChangeMag += OnChangePlayerMag;
         
         plyaerGunInventory.curGun.onChangeMag?.Invoke();
+        OnChangePlayerMoney();
     }
 
     private void Update()

@@ -24,7 +24,7 @@ public class MeleeEnemy : Enemy
         stateMachine.AddState(State.Hit, new MeleeEnemyState.HitState());
         stateMachine.AddState(State.Die, new MeleeEnemyState.DieState());
 
-        stateMachine.ChangeState(State.Idle);
+        stateMachine.ChangeState(State.Trace);
     }
 
     public override void TakeHit(float damage, RaycastHit hit)

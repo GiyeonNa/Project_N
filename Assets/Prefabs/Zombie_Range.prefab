@@ -847,6 +847,7 @@ GameObject:
   - component: {fileID: 6426229885683148847}
   - component: {fileID: 6426229886133723435}
   - component: {fileID: 6078290950821719235}
+  - component: {fileID: -5194738424054628331}
   m_Layer: 8
   m_Name: Zombie_Range
   m_TagString: Enemy
@@ -923,7 +924,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6078290950821719234}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
   m_Height: 1.82
@@ -960,7 +961,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82046b83c38904d47a04352807aab4d3, type: 2}
   dropItemPos: {fileID: 369652181}
   attackPos: {fileID: 57920784}
-  projectile: {fileID: 8844049458460685739, guid: f2add68f80e25954c8faa91ffaca0f09, type: 3}
+  projectile: {fileID: 1082066010221984, guid: caa5a6f97be4f634abec4aec51829d94, type: 3}
+--- !u!54 &-5194738424054628331
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078290950821719234}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6078312334089617884
 GameObject:
   m_ObjectHideFlags: 0

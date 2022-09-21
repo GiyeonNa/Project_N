@@ -7,8 +7,16 @@ using UnityEngine;
 public class Craft
 {
     public string craftName;
+    public int cost;
     public GameObject prefab;
     public GameObject preViewPrefab;
+}
+
+[System.Serializable]
+public class Group
+{
+    public string groupName;
+    public GameObject group;
 }
 
 public class CraftManual : MonoBehaviour
@@ -18,8 +26,10 @@ public class CraftManual : MonoBehaviour
     [SerializeField] private GameObject baseUI;
 
     [SerializeField] private Craft[] craft;
+    [SerializeField] private Group[] groups;
     private GameObject preview;
     private GameObject prefab;
+    private int cost;
 
     [SerializeField] private Transform player;
 
@@ -27,11 +37,26 @@ public class CraftManual : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float range;
     [SerializeField] private float rotateSpeed;
-    
+
+    [SerializeField] private GameObject curGroup;
+
+    public void TapClick(int tapNumber)
+    {
+        if(curGroup != null) curGroup.SetActive(false);
+        curGroup = groups[tapNumber].group;
+        curGroup.SetActive(true);
+    }
+
     public void SlotClick(int slotNumber)
     {
+        if (player.GetComponentInParent<PlayerController>().Money < craft[slotNumber].cost)
+        {
+            Debug.Log("금액부족");
+            return;
+        }
         preview = Instantiate(craft[slotNumber].preViewPrefab, player.position + player.forward, Quaternion.identity);
         prefab = craft[slotNumber].prefab;
+        cost = craft[slotNumber].cost;
         isPreViewAct = true;
         baseUI.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -85,10 +110,11 @@ public class CraftManual : MonoBehaviour
 
     private void Build()
     {
-        if (isPreViewAct && preview.GetComponent<PreViewObject>().isBuildable())
+        if (isPreViewAct && preview.GetComponent<PreViewObject>().isBuildable() )
         {
             Instantiate(prefab, hit.point, preview.transform.rotation);
             Destroy(preview);
+            player.GetComponentInParent<PlayerController>().Money -= cost;
             isActivated = false;
             isPreViewAct = false;
             preview = null;
@@ -110,7 +136,7 @@ public class CraftManual : MonoBehaviour
 
     private void Cancel()
     {
-        if(isPreViewAct) Destroy(preview);
+        if (isActivated) Destroy(preview);
         isActivated = false;
         isPreViewAct = false;
         preview = null;
@@ -127,6 +153,7 @@ public class CraftManual : MonoBehaviour
 
     private void OpenWindow()
     {
+
         isActivated = true;
         baseUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
