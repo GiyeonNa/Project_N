@@ -115,6 +115,7 @@ public class CraftManual : MonoBehaviour
             Instantiate(prefab, hit.point, preview.transform.rotation);
             Destroy(preview);
             player.GetComponentInParent<PlayerController>().Money -= cost;
+            GameManager.Instance.PlayerCamera.enabled = true;
             isActivated = false;
             isPreViewAct = false;
             preview = null;
@@ -124,7 +125,8 @@ public class CraftManual : MonoBehaviour
 
     private void PreviewPosUpdate()
     {
-        if(Physics.Raycast(player.position, player.forward, out hit, range, layerMask))
+        GameManager.Instance.PlayerCamera.enabled = true;
+        if (Physics.Raycast(player.position, player.forward, out hit, range, layerMask))
         {
             if(hit.transform != null)
             {
@@ -142,6 +144,7 @@ public class CraftManual : MonoBehaviour
         preview = null;
         prefab = null;
         baseUI.SetActive(false);
+        GameManager.Instance.PlayerCamera.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -153,7 +156,7 @@ public class CraftManual : MonoBehaviour
 
     private void OpenWindow()
     {
-
+        GameManager.Instance.PlayerCamera.enabled = false;
         isActivated = true;
         baseUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
@@ -161,6 +164,7 @@ public class CraftManual : MonoBehaviour
 
     private void CloseWindow()
     {
+        GameManager.Instance.PlayerCamera.enabled = true;
         isActivated = false;
         baseUI.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;

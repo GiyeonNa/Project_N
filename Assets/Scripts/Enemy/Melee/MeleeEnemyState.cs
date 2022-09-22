@@ -47,6 +47,8 @@ namespace MeleeEnemyState
     {
         public override void Enter(Enemy Owner)
         {
+            Owner.capsuleCollider.enabled = true;
+            Owner.Agent.enabled = true;
             Owner.tempTarget = Owner.target;
             Owner.Agent.SetDestination(Owner.tempTarget.position);
             //Owner.Animator.SetLayerWeight(1, 0f);

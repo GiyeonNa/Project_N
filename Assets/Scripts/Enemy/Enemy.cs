@@ -59,13 +59,22 @@ public class Enemy : MonoBehaviour, IDamagable
         }
     }
 
+    public void OnEnable()
+    {
+        stateMachine.ChangeState(State.Trace);
+    }
+
     public void Dead()
     {
         int num = Random.Range(0, dropItem.Length);
-        Debug.Log("Drop" + num);
         dropItem[num].Drop(dropItemPos);
 
-        Destroy(gameObject, destoryTime);
+        //이름 뒤에 (Clone) 붙어서 에러가 난다.
+        string[] tempStr = this.name.Split("(Clone)");
+        //Destroy(gameObject, destoryTime);
+        ObjectPoolController.poolDic[tempStr[0]].ReturnObj(gameObject);
+
+        
     }
 
 

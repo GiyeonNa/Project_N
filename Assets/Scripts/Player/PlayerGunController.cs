@@ -18,6 +18,7 @@ public class PlayerGunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //만약 제작 탭이 켜져있다면 밑은 모두 무시
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (!gunInventory.curGun.isReloading)
