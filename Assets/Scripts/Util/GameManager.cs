@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -22,12 +23,25 @@ public class GameManager : Singleton<GameManager>
     public Transform[] spawnPos;
     private Vector3 plusVec;
     public GameObject StartButton;
+    public bool isBattle;
+    [SerializeField] WaveInfo curwaveInfo;
+
+    //하늘 빛
+    [SerializeField] private Renderer skyDome;
+    private Vector2 nightColor = new Vector2(0.5f, 0);
+    [SerializeField] private Light sunLight;
+    [SerializeField] private Color sunLightColor;
+    [SerializeField] private Color nightLightColor;
 
 
     public void StartWave(WaveInfo curWave)
     {
         Debug.Log(curWave.name + " Start");
         StartButton.SetActive(false);
+        curwaveInfo = curWave;
+        isBattle = true;
+        skyDome.material.mainTextureOffset = nightColor;
+        sunLight.color = nightLightColor;
         for (int i = 0; i < curWave.enemies.Length; i++)
         {
             for (int j = 0; j < curWave.enemies[i].amount; j++)
@@ -83,8 +97,16 @@ public class GameManager : Singleton<GameManager>
 
     public void EndWave()
     {
+        //웨이브 마무리후 다음 웨이브가 없음 == 그게 마지막 웨이브였다는 뜻
+        if(curwaveInfo.nextWave == null)
+        {
+            //연출 후 넘어가는게 좋아보임
+            SceneManager.LoadScene("ClearTest");
+        }
         Debug.Log("End Wave");
         StartButton.SetActive(true);
+        skyDome.material.mainTextureOffset = Vector2.zero;
+        sunLight.color = sunLightColor;
     }
         
 }

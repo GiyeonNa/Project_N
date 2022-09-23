@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OverUIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void BackToMain()
+    {
+        SceneManager.LoadScene("StartTest");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Exit()
     {
-        
+        Application.Quit();
     }
 }

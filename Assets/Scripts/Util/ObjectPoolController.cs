@@ -55,7 +55,12 @@ public class ObjectPoolController: MonoBehaviour
         foreach (var pool in pools)
         {
             pool.Init();
-            poolDic.Add(pool.part.name, pool);
+            if (!poolDic.ContainsKey(pool.part.name))
+            {
+                poolDic.Add(pool.part.name, pool);
+            }
+            
+            
         }
     }
 }

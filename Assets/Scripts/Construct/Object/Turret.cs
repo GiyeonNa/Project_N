@@ -121,7 +121,7 @@ public class Turret : MonoBehaviour, IDamagable
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(name + " get  shot");
+            //Debug.Log(name + " get  shot");
             go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
         }
         //if (Physics.Raycast(this.transform.position, go_target.transform.position, out hit, firingRange))

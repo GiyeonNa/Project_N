@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CityTest.unity
     guid: 2ee22a4a942e00748b842db88c6d6b32
+  - enabled: 1
+    path: Assets/Scenes/ClearTest.unity
+    guid: 1fce55d023771694e8829b5c5ceadd40
+  - enabled: 1
+    path: Assets/Scenes/EndTest.unity
+    guid: c5c52fdf29342cb4c96ce3f66e6f3c9e
   m_configObjects: {}

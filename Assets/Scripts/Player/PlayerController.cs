@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour, IDamagable
@@ -29,7 +30,11 @@ public class PlayerController : MonoBehaviour, IDamagable
             hp = value;
             if (Hp > 100) Hp = 100;
             GameManager.Instance.PlayerUIController.OnChangePlayerHp();
-            if (hp <= 0) Debug.Log("Dead");
+            if (hp <= 0)
+            {
+                Debug.Log("Dead");
+                SceneManager.LoadScene("EndTest");
+            }
             
         }
     }

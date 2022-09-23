@@ -5,14 +5,14 @@ using UnityEngine;
 public class DomeTest : MonoBehaviour
 {
 
-    [SerializeField] private Renderer renderer;
+    //[SerializeField] private Renderer renderer;
     [SerializeField] private Material material;
     private Vector2 vector = new Vector2(0.005f, 0);
     private void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        material = renderer.material;
-        
+        //renderer = GetComponent<Renderer>();
+        //material = renderer.material;
+        //material = GetComponent<Material>();
     }
 
     // Update is called once per frame
