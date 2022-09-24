@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -32,6 +33,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Light sunLight;
     [SerializeField] private Color sunLightColor;
     [SerializeField] private Color nightLightColor;
+
+    //test
+    public delegate void asdf();
 
 
     public void StartWave(WaveInfo curWave)
@@ -107,6 +111,11 @@ public class GameManager : Singleton<GameManager>
         StartButton.SetActive(true);
         skyDome.material.mainTextureOffset = Vector2.zero;
         sunLight.color = sunLightColor;
+    }
+
+    public void BadEnd()
+    {
+        Debug.Log("Bad Eed");
     }
         
 }

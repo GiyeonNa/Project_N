@@ -6,11 +6,18 @@ public class StartObject : MonoBehaviour, IDamagable
 {
     public WaveInfo firstWaveInfo;
     public WaveInfo curwave;
+    [SerializeField] private int rotateSpeed;
 
     private void Awake()
     {
         curwave = firstWaveInfo;
     }
+
+    private void Update()
+    {
+        this.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+    }
+
     public void TakeHit(float damage, RaycastHit hit)
     {
         Debug.Log("Start Wave");

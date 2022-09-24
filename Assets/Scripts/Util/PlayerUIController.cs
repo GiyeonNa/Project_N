@@ -20,6 +20,7 @@ public class PlayerUIController : MonoBehaviour
         
         plyaerGunInventory.curGun.onChangeMag?.Invoke();
         OnChangePlayerMoney();
+        OnChangePlayerHp();
     }
 
     private void Update()
@@ -38,12 +39,12 @@ public class PlayerUIController : MonoBehaviour
 
     public void OnChangePlayerMoney()
     {
-        moneyText.SetText("Money : " + GameManager.Instance.PlayerController.Money.ToString());
+        moneyText.SetText(GameManager.Instance.PlayerController.Money.ToString());
     }
 
     public void OnChangePlayerHp()
     {
-        hpText.SetText("HP : " + GameManager.Instance.PlayerController.Hp.ToString());
+        hpText.SetText(GameManager.Instance.PlayerController.Hp.ToString());
     }
 
 
