@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour, IDamagable
             if (hp <= 0)
             {
                 Debug.Log("Dead");
-                SceneManager.LoadScene("EndTest");
+                //dead
+                characterController.enabled = false;
+                GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
             }
             
         }

@@ -14,7 +14,7 @@ public class MainTarget : MonoBehaviour, IDamagable
         set 
         {
             hp = value;
-            if (Hp <= 0) GameManager.Instance.BadEnd();
+            if (Hp <= 0) GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
 
         } 
     }

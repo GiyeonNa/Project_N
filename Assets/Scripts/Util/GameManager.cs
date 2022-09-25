@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using Unity.VisualScripting;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -25,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     private Vector3 plusVec;
     public GameObject StartButton;
     public bool isBattle;
-    [SerializeField] WaveInfo curwaveInfo;
+    [SerializeField] private WaveInfo curwaveInfo;
 
     //하늘 빛
     [SerializeField] private Renderer skyDome;
@@ -34,70 +38,74 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Color sunLightColor;
     [SerializeField] private Color nightLightColor;
 
-    //test
-    public delegate void asdf();
+    //fade
+    public Image fadeImg;
+
+    //TimeLine
+    [SerializeField] private PlayableDirector playableDirector;
+    public PlayableDirector PlayableDirector { get { return playableDirector; } }
+    public TimelineAsset[] timelineClip;
 
 
-    public void StartWave(WaveInfo curWave)
+    //public void StartWave(WaveInfo curWave)
+    //{
+    //    Debug.Log(curWave.name + " Start");
+    //    StartButton.SetActive(false);
+    //    curwaveInfo = curWave;
+    //    isBattle = true;
+    //    for (int i = 0; i < curWave.enemies.Length; i++)
+    //    {
+    //        for (int j = 0; j < curWave.enemies[i].amount; j++)
+    //        {
+    //            int tempPos = Random.Range(0, 4);
+    //            plusVec = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
+    //            ObjectPoolController.poolDic[curWave.enemies[i].type].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
+    //        }
+    //    }
+    //}
+
+    public void StartWave()
     {
-        Debug.Log(curWave.name + " Start");
         StartButton.SetActive(false);
-        curwaveInfo = curWave;
         isBattle = true;
-        skyDome.material.mainTextureOffset = nightColor;
-        sunLight.color = nightLightColor;
-        for (int i = 0; i < curWave.enemies.Length; i++)
+        for (int i = 0; i < curwaveInfo.enemies.Length; i++)
         {
-            for (int j = 0; j < curWave.enemies[i].amount; j++)
+            for (int j = 0; j < curwaveInfo.enemies[i].amount; j++)
             {
                 int tempPos = Random.Range(0, 4);
                 plusVec = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
-                ObjectPoolController.poolDic[curWave.enemies[i].type].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
+                ObjectPoolController.poolDic[curwaveInfo.enemies[i].type].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
             }
         }
-        #region preSpawnLogic
-        //switch (curWave.enemies.Length)
-        //{
-        //    case 1:
-        //        for(int i=0; i<curWave.enemies.Length; i++)
-        //        {
-        //            for(int j=0; j < curWave.enemies[i].amount; j++)
-        //            {
-        //                int tempPos = Random.Range(0, 4);
-        //                plusVec = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
-        //                ObjectPoolController.poolDic[curWave.enemies[i].type].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
-        //            }
-        //        }
-        //        break;
-        //    case 2:
-        //        break;
-        //}
-        ////Melee 생성
-        //if (curWave.enemies[0] != null)
-        //{
-        //    for (int i = 0; i < curWave.enemies[0].amount; i++)
-        //    {
-        //        int tempPos = Random.Range(0,4);
-        //        plusVec = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
-        //        ObjectPoolController.poolDic["Zombie_Melee"].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
-        //    }
-        //}
-
-        ////아예 들어있지 않은 웨이브는 어떻게 처리할것인가?
-        ////Range 생성
-        //if (curWave.enemies[1] != null)
-        //{
-        //    for (int i = 0; i < curWave.enemies[1].amount; i++)
-        //    {
-        //        int tempPos = Random.Range(0, 4);
-        //        plusVec = new Vector3(Random.Range(-3f, 3f), 0, 0);
-        //        ObjectPoolController.poolDic["Zombie_Range"].UseObj(spawnPos[tempPos].position, spawnPos[tempPos].rotation);
-        //    }
-        //}
-
-        //받아온 웨이브 정보를 기반으로 웨이브시작, objectpool 가동
-        #endregion
     }
+
+    public void ChangeLightToNight()
+    {
+        skyDome.material.mainTextureOffset = nightColor;
+        sunLight.color = nightLightColor;
+    }
+
+    public void ChangeLightToDay()
+    {
+        skyDome.material.mainTextureOffset = Vector2.zero;
+        sunLight.color = sunLightColor;
+    }
+
+    public void FadeImgDeAct()
+    {
+        fadeImg.gameObject.SetActive(false);
+    }
+
+    public void ClaerGame()
+    {
+        SceneManager.LoadScene("ClearTest");
+    }
+
+    public void BadEnd()
+    {
+        SceneManager.LoadScene("DeadTest");
+    }
+
 
     public void EndWave()
     {
@@ -105,17 +113,15 @@ public class GameManager : Singleton<GameManager>
         if(curwaveInfo.nextWave == null)
         {
             //연출 후 넘어가는게 좋아보임
-            SceneManager.LoadScene("ClearTest");
+            PlayableDirector.Play(timelineClip[3]);
+        }
+        if (curwaveInfo.nextWave != null)
+        {
+            curwaveInfo = curwaveInfo.nextWave;
         }
         Debug.Log("End Wave");
         StartButton.SetActive(true);
-        skyDome.material.mainTextureOffset = Vector2.zero;
-        sunLight.color = sunLightColor;
     }
 
-    public void BadEnd()
-    {
-        Debug.Log("Bad Eed");
-    }
-        
+
 }

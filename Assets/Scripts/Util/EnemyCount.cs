@@ -23,7 +23,7 @@ public class EnemyCount : MonoBehaviour
         if (enemies.Length == 0 && GameManager.Instance.isBattle)
         {
             GameManager.Instance.isBattle = false;
-            GameManager.Instance.EndWave();
+            GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[2]);
         }
     }
 }
