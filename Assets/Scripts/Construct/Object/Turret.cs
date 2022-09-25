@@ -33,11 +33,14 @@ public class Turret : MonoBehaviour, IDamagable
     [SerializeField] private float coolDown;
     [SerializeField] private float hp;
 
+    public AudioSource audioSource;
+    public AudioClip shotSound;
+
+    Ray ray;
 
     void Start()
     {
-        // Set the firing range distance
-        //this.GetComponent<SphereCollider>().radius = firingRange;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -116,14 +119,20 @@ public class Turret : MonoBehaviour, IDamagable
     {
         //go_target.gameObject.GetComponent<Enemy>().TakeHit(damage);
         //Debug.Log(go_target.gameObject.GetComponent<Enemy>().Hp + "³²À½");
-        Ray ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
+
+        ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
+        if (go_target == null) StopCoroutine(CoAttack(0));
+        //Ray ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
         Debug.DrawRay(this.transform.position + plusVec, go_target.transform.position - this.transform.position, Color.red);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             //Debug.Log(name + " get  shot");
+            audioSource.clip = shotSound;
+            audioSource.Play();
             go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
         }
+
         //if (Physics.Raycast(this.transform.position, go_target.transform.position, out hit, firingRange))
         //{
         //    Debug.Log(hit.transform.name);

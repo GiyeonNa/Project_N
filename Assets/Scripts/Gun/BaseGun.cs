@@ -12,6 +12,11 @@ public abstract class BaseGun : MonoBehaviour
     public RaycastHit hit;
     public ParticleSystem muzzle;
 
+    //sound
+    public AudioSource audioSource;
+    public AudioClip shotSound;
+    public AudioClip reloadSound;
+
     //public event UnityAction onChangeMag;
     public UnityAction onChangeMag;
     //자체 쿨타임

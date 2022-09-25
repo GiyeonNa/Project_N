@@ -10,6 +10,7 @@ public class AR : BaseGun
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -25,6 +26,8 @@ public class AR : BaseGun
     public override IEnumerator Reload()
     {
         isReloading = true;
+        audioSource.clip = reloadSound;
+        audioSource.Play();
         animator.SetTrigger("Reload");
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
@@ -43,6 +46,9 @@ public class AR : BaseGun
         curFireRate = gunFireRate;
         curMagazine -= 1;
         onChangeMag?.Invoke();
+
+        audioSource.clip = shotSound;
+        audioSource.Play();
 
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, layerMask))
         {

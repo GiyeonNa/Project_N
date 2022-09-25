@@ -19,7 +19,7 @@ public class PlayerGunController : MonoBehaviour
     void Update()
     {
         //만약 제작 탭이 켜져있다면 밑은 모두 무시
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !gunInventory.curGun.isReloading)
         {
             if (!gunInventory.curGun.isReloading)
             {

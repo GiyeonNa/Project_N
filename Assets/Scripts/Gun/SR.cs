@@ -7,6 +7,7 @@ public class SR : BaseGun
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -23,6 +24,8 @@ public class SR : BaseGun
     {
         isReloading = true;
         animator.SetTrigger("Reload");
+        audioSource.clip = reloadSound;
+        audioSource.Play();
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
         totalMagazine -= (reloadMagazine - curMagazine);
@@ -38,6 +41,10 @@ public class SR : BaseGun
         curFireRate = gunFireRate;
         curMagazine -= 1;
         onChangeMag?.Invoke();
+        audioSource.clip = shotSound;
+        audioSource.Play();
+        muzzle.Play();
+
         //단발 연발로 바꾸기
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, layerMask))
         {
