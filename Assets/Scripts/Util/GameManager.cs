@@ -25,6 +25,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ObjectPoolController objectPoolController;
     public ObjectPoolController ObjectPoolController { get { return objectPoolController; } }
 
+    [SerializeField] private CraftManual craftManual;
+    public CraftManual CraftManual { get { return craftManual; } }
+
     public Transform[] spawnPos;
     private Vector3 plusVec;
     public GameObject StartButton;

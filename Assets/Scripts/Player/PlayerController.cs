@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour, IDamagable
 {
     private CharacterController characterController;
-    [SerializeField] private GroundChecker groundChecker;
+    //[SerializeField] private GroundChecker groundChecker;
 
     private Vector3 moveVec;
     [SerializeField] private float moveSpeed;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MainTarget : MonoBehaviour, IDamagable
 {
@@ -14,9 +15,22 @@ public class MainTarget : MonoBehaviour, IDamagable
         set 
         {
             hp = value;
-            if (Hp <= 0) GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
+            targetHpText.SetText(Hp.ToString());
+            if (Hp <= 0)
+            {
+                this.gameObject.SetActive(false);
+                Hp = 0;
+                GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
+            }
 
         } 
+    }
+
+    [SerializeField] TextMeshProUGUI targetHpText;
+
+    private void Awake()
+    {
+        targetHpText.SetText(Hp.ToString());
     }
 
     public void TakeHit(float damage, RaycastHit hit)

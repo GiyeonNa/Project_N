@@ -19,7 +19,7 @@ public class EnemyCount : MonoBehaviour
     void Update()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        enemyCountText.SetText("Left Enemy : " + enemies.Length);
+        enemyCountText.SetText(enemies.Length.ToString());
         if (enemies.Length == 0 && GameManager.Instance.isBattle)
         {
             GameManager.Instance.isBattle = false;

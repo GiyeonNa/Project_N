@@ -117,37 +117,38 @@ public class Turret : MonoBehaviour, IDamagable
 
     IEnumerator CoAttack(float cooldown)
     {
-        //go_target.gameObject.GetComponent<Enemy>().TakeHit(damage);
-        //Debug.Log(go_target.gameObject.GetComponent<Enemy>().Hp + "³²À½");
         RaycastHit hit;
-        //ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
-        //Debug.DrawRay(this.transform.position + plusVec, go_target.transform.position - this.transform.position, Color.red);
+        ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
+        Debug.DrawRay(this.transform.position + plusVec, go_target.transform.position - this.transform.position, Color.red);
 
-        //if (Physics.Raycast(ray, out hit))
-        //{
-        //    //Debug.Log(name + " get  shot");
-        //    audioSource.clip = shotSound;
-        //    audioSource.Play();
-        //    go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
-        //}
-
-        if (Physics.Raycast(this.transform.position, (go_target.transform.position - this.transform.position), out hit, layerMask))
+        if (Physics.Raycast(ray, out hit))
         {
+            //Debug.Log(name + " get  shot");
             audioSource.clip = shotSound;
             audioSource.Play();
             go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
         }
 
-        //if (Physics.Raycast(this.transform.position, go_target.transform.position, out hit, firingRange))
+        //if (Physics.Raycast(this.transform.position, (go_target.transform.position - this.transform.position), out hit, layerMask))
         //{
-        //    Debug.Log(hit.transform.name);
-        //    Debug.Log("Get Hit");
-        //    //go_target.gameObject.GetComponent<Enemy>().TakeHit(damage);
-        //    yield return new WaitForSeconds(cooldown);
-        //    StartCoroutine(CoAttack(cooldown));
+        //    audioSource.clip = shotSound;
+        //    audioSource.Play();
+        //    go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
         //}
         yield return new WaitForSeconds(cooldown);
         StartCoroutine(CoAttack(cooldown));
+    }
+
+    IEnumerator Test()
+    {
+        while (true)
+        {
+            RaycastHit hit;
+            ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
+            yield return new WaitForSeconds(coolDown);
+
+        }
+        
     }
 
     public void TakeHit(float damage, RaycastHit hit)

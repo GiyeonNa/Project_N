@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 [System.Serializable]
@@ -21,7 +21,7 @@ public class Group
 
 public class CraftManual : MonoBehaviour
 {
-    [SerializeField] private bool isActivated = false;
+    [SerializeField] public bool isActivated = false;
     private bool isPreViewAct = false;
     [SerializeField] private GameObject baseUI;
 
