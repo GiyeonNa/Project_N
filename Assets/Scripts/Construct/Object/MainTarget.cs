@@ -18,19 +18,19 @@ public class MainTarget : MonoBehaviour, IDamagable
         } 
         set 
         {
-            hp = value;
-            //targetHpText.SetText(Hp.ToString());
-            OnChangeTargetHp?.Invoke();
             if (Hp <= 0)
             {
-                hp = 0;
                 foreach (Collider col in colliders)
                 {
                     col.enabled = false;
                 }
-               
+
                 GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
             }
+            hp = value;
+            //targetHpText.SetText(Hp.ToString());
+            OnChangeTargetHp?.Invoke();
+            
 
         } 
     }

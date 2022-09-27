@@ -14,7 +14,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI targetHpText;
 
-
+    
     //hit effect
     [SerializeField] private Image redLineImage;
    
@@ -25,7 +25,7 @@ public class PlayerUIController : MonoBehaviour
         //UIcurGun.onChangeMag += OnChangePlayerMag;
         plyaerGunInventory.curGun.onChangeMag += OnChangePlayerMag;
         mainTarget.OnChangeTargetHp += OnChangeTargetHp;
-
+        
         plyaerGunInventory.curGun.onChangeMag?.Invoke();
         OnChangePlayerMoney();
         OnChangePlayerHp();

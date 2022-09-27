@@ -16,4 +16,4 @@ MonoBehaviour:
   nextWave: {fileID: 11400000, guid: a9cb2d5041bf6894a8d43c8bcb35c3d1, type: 2}
   enemies:
   - type: Zombie_Melee
-    amount: 10
+    amount: 7

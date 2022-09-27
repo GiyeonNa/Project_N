@@ -9,12 +9,10 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour, IDamagable
 {
     private CharacterController characterController;
-    //[SerializeField] private GroundChecker groundChecker;
-
+    private AudioSource audioSource;
+    //[SerializeField] private AudioClip footstepSound;
     private Vector3 moveVec;
     [SerializeField] private float moveSpeed;
-    //private float moveH;
-    //private float moveV;
     private float moveY;
     private float moveRate;
 
@@ -31,9 +29,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         { 
             hp = value;
             if (Hp > 100) Hp = 100;
-            //onChangeHp?.Invoke();
             StartCoroutine(GameManager.Instance.PlayerUIController.ChangeAll());
-            //GameManager.Instance.PlayerUIController.OnChangePlayerHp();
             if (hp <= 0)
             {
                 Debug.Log("Dead");
@@ -41,7 +37,6 @@ public class PlayerController : MonoBehaviour, IDamagable
                 characterController.enabled = false;
                 GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
             }
-            
         }
     }
     [SerializeField] private int money;
@@ -62,13 +57,22 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        
         Move();
-        if(Input.GetButtonDown("Jump") && characterController.isGrounded) Jump();
+        if (characterController.isGrounded && characterController.velocity.magnitude > 1f && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+            //Debug.Log(characterController.velocity.x);
+            //Debug.Log(characterController.velocity.magnitude);
+        if (Input.GetButtonDown("Jump") && characterController.isGrounded) Jump();
         Gravity();
     }
 
@@ -79,10 +83,14 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         if (Input.GetButton("Dash"))
         {
+            audioSource.volume = 0.4f;
+            audioSource.pitch = 1.5f;
             moveSpeed = 7f;
         }
         else
         {
+            audioSource.volume = 0.2f;
+            audioSource.pitch = 1f;
             moveSpeed = 4f;
         }
 
