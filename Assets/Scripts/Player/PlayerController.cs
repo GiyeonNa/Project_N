@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour, IDamagable
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private float jumpTime;
     [SerializeField] private float jumpSpeed;
 
+    public UnityAction asdf;
     [SerializeField] private float hp;
 
     public float Hp
@@ -29,7 +31,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         { 
             hp = value;
             if (Hp > 100) Hp = 100;
-            GameManager.Instance.PlayerUIController.OnChangePlayerHp();
+            //onChangeHp?.Invoke();
+            StartCoroutine(GameManager.Instance.PlayerUIController.ChangeAll());
+            //GameManager.Instance.PlayerUIController.OnChangePlayerHp();
             if (hp <= 0)
             {
                 Debug.Log("Dead");

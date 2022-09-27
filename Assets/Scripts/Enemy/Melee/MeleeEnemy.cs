@@ -13,6 +13,7 @@ public class MeleeEnemy : Enemy
         Animator = GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
 
         target = GameObject.Find("Target").transform;
         tempTarget = GameObject.Find("Target").transform;

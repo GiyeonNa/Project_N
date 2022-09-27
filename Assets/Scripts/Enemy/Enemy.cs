@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour, IDamagable
     public DropItem[] dropItem;
     public Transform dropItemPos;
 
+    public AudioSource audioSource;
+    public AudioClip deadSound;
+
     // Update is called once per frame
     private void Update()
     {
@@ -68,13 +71,25 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         int num = Random.Range(0, dropItem.Length);
         dropItem[num].Drop(dropItemPos);
-
+        audioSource.clip = deadSound;
+        audioSource.Play();
         //이름 뒤에 (Clone) 붙어서 에러가 난다.
         string[] tempStr = this.name.Split("(Clone)");
-        //Destroy(gameObject, destoryTime);
         ObjectPoolController.poolDic[tempStr[0]].ReturnObj(gameObject);
-
         
+    }
+
+    public IEnumerator DeadCo()
+    {
+        int num = Random.Range(0, dropItem.Length);
+        dropItem[num].Drop(dropItemPos);
+        audioSource.clip = deadSound;
+        audioSource.Play();
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(destoryTime);
+        //이름 뒤에 (Clone) 붙어서 에러가 난다.
+        string[] tempStr = this.name.Split("(Clone)");
+        ObjectPoolController.poolDic[tempStr[0]].ReturnObj(gameObject);
     }
 
 

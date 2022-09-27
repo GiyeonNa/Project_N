@@ -159,7 +159,6 @@ public class Turret : MonoBehaviour, IDamagable
     public void TakeHit(float damage)
     {
         hp -= damage;
-        Debug.Log(damage + "∏¶ ¿‘¿Ω");
         if (hp <= 0) Destroy(gameObject, 1f);
     }
 }

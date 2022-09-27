@@ -1854,6 +1854,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GatelingGun Turret Lv1
       objectReference: {fileID: 0}
+    - target: {fileID: 2328741261241232864, guid: 0de9ee409f8f23d4ea41a58e68730264, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0de9ee409f8f23d4ea41a58e68730264, type: 3}
 --- !u!1 &933817175
@@ -1874,7 +1878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &933817176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2076,6 +2080,10 @@ PrefabInstance:
     - target: {fileID: 5756652245729081488, guid: 16228e6ab6e72674c8ec69403fe440c7, type: 3}
       propertyPath: m_Name
       value: SR
+      objectReference: {fileID: 0}
+    - target: {fileID: 5756652245729081488, guid: 16228e6ab6e72674c8ec69403fe440c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5757876518567502754, guid: 16228e6ab6e72674c8ec69403fe440c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3562,9 +3570,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plyaerGunInventory: {fileID: 2585085850617909368}
+  mainTarget: {fileID: 0}
   magText: {fileID: 1777903516}
   moneyText: {fileID: 909145698}
   hpText: {fileID: 1519431918}
+  targetHpText: {fileID: 0}
+  redLineImage: {fileID: 0}
 --- !u!4 &1509398149
 Transform:
   m_ObjectHideFlags: 0
@@ -3611,6 +3622,7 @@ MonoBehaviour:
   gunInventory: {fileID: 2585085850617909368}
   playerUIController: {fileID: 1509398148}
   objectPoolController: {fileID: 0}
+  craftManual: {fileID: 0}
   spawnPos: []
   StartButton: {fileID: 0}
   isBattle: 0
@@ -5778,7 +5790,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

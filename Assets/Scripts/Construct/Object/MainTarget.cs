@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class MainTarget : MonoBehaviour, IDamagable
 {
     [SerializeField] private float hp;
+    [SerializeField] private Collider[] colliders;
+
+    public UnityAction OnChangeTargetHp;
     public float Hp 
     { 
         get 
@@ -15,11 +19,16 @@ public class MainTarget : MonoBehaviour, IDamagable
         set 
         {
             hp = value;
-            targetHpText.SetText(Hp.ToString());
+            //targetHpText.SetText(Hp.ToString());
+            OnChangeTargetHp?.Invoke();
             if (Hp <= 0)
             {
-                this.gameObject.SetActive(false);
-                Hp = 0;
+                hp = 0;
+                foreach (Collider col in colliders)
+                {
+                    col.enabled = false;
+                }
+               
                 GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
             }
 

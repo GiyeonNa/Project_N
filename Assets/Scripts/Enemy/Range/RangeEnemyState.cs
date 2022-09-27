@@ -125,7 +125,8 @@ namespace RangeEnemyState
             Owner.Animator.SetTrigger("Dead");
             Owner.capsuleCollider.enabled = false;
             Owner.Agent.enabled = false;
-            Owner.Dead();
+            //Owner.Dead();
+            Owner.StartCoroutine(Owner.DeadCo());
         }
 
         public override void Update(Enemy Owner)

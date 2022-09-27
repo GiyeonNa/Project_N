@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class SR : BaseGun
 {
+    private bool isScope = false;
+
+    public GameObject scopeOverlay;
+    public GameObject weaponCamera;
+    public Camera mainCamera;
+    public GameObject cross;
+
+    public float scopeFOV = 15f;
+    private float normalFOV;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -19,7 +29,39 @@ public class SR : BaseGun
     private void Update()
     {
         GunFireRateCale();
+        if (Input.GetButtonDown("Fire2"))
+        {
+            isScope = !isScope;
+            animator.SetBool("Scope", isScope);
+
+            if (isScope)
+                StartCoroutine(OnScope());
+            else
+                OnUnscope();
+        }
+        
+
     }
+
+    void OnUnscope()
+    {
+        scopeOverlay.SetActive(false);
+        weaponCamera.SetActive(true);
+        cross.SetActive(true);
+        mainCamera.fieldOfView = normalFOV;
+    }
+
+    IEnumerator OnScope()
+    {
+        yield return new WaitForSeconds(0.15f);
+        normalFOV = mainCamera.fieldOfView;
+        mainCamera.fieldOfView = scopeFOV;
+
+        scopeOverlay.SetActive(true);
+        weaponCamera.SetActive(false);
+        cross.SetActive(false);
+    }
+
     public override IEnumerator Reload()
     {
         isReloading = true;
