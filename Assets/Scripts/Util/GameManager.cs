@@ -28,6 +28,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private CraftManual craftManual;
     public CraftManual CraftManual { get { return craftManual; } }
 
+    [SerializeField] public Pause pause;
+
     public Transform[] spawnPos;
     private Vector3 plusVec;
     public GameObject StartButton;

@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour, IDamagable
         if (hp <= 0)
         {
             animator.SetTrigger("Dead");
-            //Destroy(capsuleCollider);
             capsuleCollider.enabled = false;
             Dead();
         }

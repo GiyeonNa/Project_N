@@ -9,6 +9,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] public GunInventory plyaerGunInventory;
     [SerializeField] public MainTarget mainTarget;
 
+
     [SerializeField] private TextMeshProUGUI magText;
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI hpText;

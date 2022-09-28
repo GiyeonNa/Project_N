@@ -23,7 +23,7 @@ public class Turret : MonoBehaviour, IDamagable
     public ParticleSystem muzzelFlash;
 
     // Used to start and stop the turret firing
-    bool canFire = false;
+    bool isFire = false;
 
     [SerializeField] private LayerMask layerMask;
 
@@ -37,9 +37,11 @@ public class Turret : MonoBehaviour, IDamagable
     public AudioClip shotSound;
 
     Ray ray;
-
+    IEnumerator coattack;
     void Start()
     {
+
+        coattack = CoAttack();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -60,7 +62,7 @@ public class Turret : MonoBehaviour, IDamagable
         //    Gizmos.DrawLine(this.transform.position + plusVec, go_target.transform.position + plusVec);
     }
 
-    
+ 
 
     void AimAndFire()
     {
@@ -68,12 +70,12 @@ public class Turret : MonoBehaviour, IDamagable
         
         if (targets.Length > 0)
         {
-            canFire = true;
+            isFire = true;
             go_target = targets[0].transform;
         }
         else
         {
-            canFire = false;
+            isFire = false;
             go_target = null;
         }
 
@@ -81,7 +83,7 @@ public class Turret : MonoBehaviour, IDamagable
         go_barrel.transform.Rotate(0, 0, currentRotationSpeed * Time.deltaTime);
 
         // if can fire turret activates
-        if (canFire)
+        if (isFire)
         {
             // start rotation
             currentRotationSpeed = barrelRotationSpeed;
@@ -97,8 +99,8 @@ public class Turret : MonoBehaviour, IDamagable
             if (!muzzelFlash.isPlaying)
             {
                 muzzelFlash.Play();
-                Debug.Log("Start Coroutine");
-                StartCoroutine(CoAttack(coolDown));
+
+                StartCoroutine(coattack);
             }
         }
         else
@@ -110,13 +112,16 @@ public class Turret : MonoBehaviour, IDamagable
             if (muzzelFlash.isPlaying)
             {
                 muzzelFlash.Stop();
-                StopCoroutine(CoAttack(0));
+                Debug.Log("End Coroutine");
+                StopCoroutine(coattack);
             }
         }
     }
 
-    IEnumerator CoAttack(float cooldown)
+
+    IEnumerator CoAttack()
     {
+        Debug.Log("Start Coroutine");
         RaycastHit hit;
         ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
         Debug.DrawRay(this.transform.position + plusVec, go_target.transform.position - this.transform.position, Color.red);
@@ -135,21 +140,12 @@ public class Turret : MonoBehaviour, IDamagable
         //    audioSource.Play();
         //    go_target.GetComponent<IDamagable>().TakeHit(damage, hit);
         //}
-        yield return new WaitForSeconds(cooldown);
-        StartCoroutine(CoAttack(cooldown));
+
+        yield return new WaitForSeconds(coolDown);
+        coattack = CoAttack();
+        StartCoroutine(coattack);
     }
 
-    IEnumerator Test()
-    {
-        while (true)
-        {
-            RaycastHit hit;
-            ray = new Ray(this.transform.position + plusVec, (go_target.transform.position - this.transform.position));
-            yield return new WaitForSeconds(coolDown);
-
-        }
-        
-    }
 
     public void TakeHit(float damage, RaycastHit hit)
     {

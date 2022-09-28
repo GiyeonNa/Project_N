@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerGunController : MonoBehaviour
 {
-    //[SerializeField] private BaseGun curGun;
-    //public BaseGun CurGun { get { return curGun; } set { curGun = value; } }
-
     [SerializeField] GunInventory gunInventory;
 
     private void Awake()
@@ -18,8 +15,11 @@ public class PlayerGunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //만약 제작 탭이 켜져있다면 밑은 모두 무시
         if (GameManager.Instance.CraftManual.isActivated)
+        {
+            return;
+        }
+        if (GameManager.Instance.pause.isShow)
         {
             return;
         }

@@ -19,17 +19,19 @@ public class PlayerController : MonoBehaviour, IDamagable
     private float jumpTime;
     [SerializeField] private float jumpSpeed;
 
-    public UnityAction asdf;
     [SerializeField] private float hp;
 
     public float Hp
     {
         get { return hp; }
         set 
-        { 
+        {
+            float temphp = hp;
             hp = value;
             if (Hp > 100) Hp = 100;
-            StartCoroutine(GameManager.Instance.PlayerUIController.ChangeAll());
+            if(hp < temphp)
+                StartCoroutine(GameManager.Instance.PlayerUIController.ChangeAll());
+            GameManager.Instance.PlayerUIController.OnChangePlayerHp();
             if (hp <= 0)
             {
                 Debug.Log("Dead");

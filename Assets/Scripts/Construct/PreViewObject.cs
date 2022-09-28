@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class PreViewObject : MonoBehaviour
 {
-
     private List<Collider> colliders = new List<Collider>();
-
     [SerializeField] private int groundLayer;
     private const int ignoreLayer = 2;
-
     [SerializeField] private Material green;
     [SerializeField] private Material red;
-
-
 
     // Update is called once per frame
     void Update()

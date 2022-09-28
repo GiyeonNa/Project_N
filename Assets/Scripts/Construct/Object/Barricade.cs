@@ -20,7 +20,6 @@ public class Barricade : MonoBehaviour, IDamagable
 
     public void TakeHit(float damage)
     {
-        Debug.Log(damage + " 만큼 피해를 입음");
         Hp -= damage;
     }
 

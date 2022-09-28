@@ -6,7 +6,7 @@ public class Pause : MonoBehaviour
 {
 
     [SerializeField] private GameObject pauseGroup;
-    [SerializeField] private bool isShow;
+    [SerializeField] public bool isShow;
 
 
     // Update is called once per frame

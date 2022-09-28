@@ -95,10 +95,10 @@ public class CraftManual : MonoBehaviour
         {
             switch (key){
                 case KeyCode.Q:
-                    preview.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+                    preview.transform.Rotate(Vector3.up * -rotateSpeed * Time.deltaTime);
                     break;
                 case KeyCode.E:
-                    preview.transform.Rotate(Vector3.up * -rotateSpeed * Time.deltaTime);
+                    preview.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
                     break;
             }
             
