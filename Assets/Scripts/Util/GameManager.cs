@@ -31,17 +31,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public Pause pause;
 
     public Transform[] spawnPos;
-    private Vector3 plusVec;
-    public GameObject StartButton;
+    private Vector3 spawnAdjustPos;
+    public GameObject startButton;
     public bool isBattle;
     [SerializeField] private WaveInfo curwaveInfo;
-
-    //ÇÏ´Ã ºû
-    [SerializeField] private Renderer skyDome;
-    private Vector2 nightColor = new Vector2(0.5f, 0);
-    [SerializeField] private Light sunLight;
-    [SerializeField] private Color sunLightColor;
-    [SerializeField] private Color nightLightColor;
 
     //fade
     public Image fadeImg;
@@ -52,49 +45,21 @@ public class GameManager : Singleton<GameManager>
     public TimelineAsset[] timelineClip;
 
 
-    //public void StartWave(WaveInfo curWave)
-    //{
-    //    Debug.Log(curWave.name + " Start");
-    //    StartButton.SetActive(false);
-    //    curwaveInfo = curWave;
-    //    isBattle = true;
-    //    for (int i = 0; i < curWave.enemies.Length; i++)
-    //    {
-    //        for (int j = 0; j < curWave.enemies[i].amount; j++)
-    //        {
-    //            int tempPos = Random.Range(0, 4);
-    //            plusVec = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
-    //            ObjectPoolController.poolDic[curWave.enemies[i].type].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
-    //        }
-    //    }
-    //}
-
     public void StartWave()
     {
-        StartButton.SetActive(false);
+        startButton.SetActive(false);
         isBattle = true;
         for (int i = 0; i < curwaveInfo.enemies.Length; i++)
         {
             for (int j = 0; j < curwaveInfo.enemies[i].amount; j++)
             {
                 int tempPos = Random.Range(0, 4);
-                plusVec = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
-                ObjectPoolController.poolDic[curwaveInfo.enemies[i].type].UseObj(spawnPos[tempPos].position + plusVec, spawnPos[tempPos].rotation);
+                spawnAdjustPos = new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
+                ObjectPoolController.poolDic[curwaveInfo.enemies[i].type].UseObj(spawnPos[tempPos].position + spawnAdjustPos, spawnPos[tempPos].rotation);
             }
         }
     }
 
-    public void ChangeLightToNight()
-    {
-        skyDome.material.mainTextureOffset = nightColor;
-        sunLight.color = nightLightColor;
-    }
-
-    public void ChangeLightToDay()
-    {
-        skyDome.material.mainTextureOffset = Vector2.zero;
-        sunLight.color = sunLightColor;
-    }
 
     public void FadeImgDeAct()
     {
@@ -125,7 +90,7 @@ public class GameManager : Singleton<GameManager>
             curwaveInfo = curwaveInfo.nextWave;
         }
         Debug.Log("End Wave");
-        StartButton.SetActive(true);
+        startButton.SetActive(true);
     }
 
 

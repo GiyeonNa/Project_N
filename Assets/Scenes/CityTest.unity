@@ -13895,6 +13895,7 @@ GameObject:
   - component: {fileID: 452312696}
   - component: {fileID: 452312699}
   - component: {fileID: 452312700}
+  - component: {fileID: 452312704}
   - component: {fileID: 452312701}
   - component: {fileID: 452312702}
   - component: {fileID: 452312703}
@@ -13948,13 +13949,9 @@ MonoBehaviour:
   - {fileID: 24966149}
   - {fileID: 1302135227}
   - {fileID: 466965080}
-  StartButton: {fileID: 80909498}
+  startButton: {fileID: 80909498}
   isBattle: 0
   curwaveInfo: {fileID: 11400000, guid: af05e978b54f86446b983b3e688408b6, type: 2}
-  skyDome: {fileID: 1234456107}
-  sunLight: {fileID: 970507425}
-  sunLightColor: {r: 1, g: 0.7807005, b: 0.44117647, a: 1}
-  nightLightColor: {r: 0, g: 0, b: 0, a: 1}
   fadeImg: {fileID: 1783610480}
   playableDirector: {fileID: 452312701}
   timelineClip:
@@ -14100,8 +14097,8 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 452312697}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        - m_Target: {fileID: 452312704}
+          m_TargetAssemblyTypeName: SkyChange, Assembly-CSharp
           m_MethodName: ChangeLightToNight
           m_Mode: 1
           m_Arguments:
@@ -14128,8 +14125,8 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 452312697}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        - m_Target: {fileID: 452312704}
+          m_TargetAssemblyTypeName: SkyChange, Assembly-CSharp
           m_MethodName: ChangeLightToDay
           m_Mode: 1
           m_Arguments:
@@ -14278,6 +14275,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &452312704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452312695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b48534dd62f8314fb212947e75c534f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skyDome: {fileID: 1234456107}
+  sunLight: {fileID: 970507425}
+  dayLightColor: {r: 1, g: 0.7807005, b: 0.44117647, a: 1}
+  nightLightColor: {r: 0.58704203, g: 0.57439446, b: 0.9411765, a: 1}
 --- !u!1001 &457334581
 PrefabInstance:
   m_ObjectHideFlags: 0
