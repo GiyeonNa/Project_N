@@ -30,8 +30,9 @@ public class DropItemController : MonoBehaviour,IPickUpable
 
             case DropItem.Type.Money:
                 {
-                    GameManager.Instance.PlayerController.Money += dropItem.amount;
-                    Debug.Log("Money : " + dropItem.amount);
+                    int resultMoney = dropItem.amount + UnityEngine.Random.Range(0,50);
+                    GameManager.Instance.PlayerController.Money += resultMoney;
+                    Debug.Log("Money : " + resultMoney);
                     Destroy(gameObject);
                 }
                 break;

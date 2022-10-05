@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7716158996221579855}
   - component: {fileID: 7755955940698820941}
   - component: {fileID: 7716158996221579852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Start Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b055ed87039300645a0ec2dec0c0e694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWaveInfo: {fileID: 0}
-  curwave: {fileID: 0}
   rotateSpeed: 45

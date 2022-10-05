@@ -16,6 +16,6 @@ MonoBehaviour:
   nextWave: {fileID: 0}
   enemies:
   - type: Zombie_Melee
-    amount: 15
+    amount: 10
   - type: Zombie_Range
     amount: 5

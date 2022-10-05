@@ -18,7 +18,8 @@ public class MainTarget : MonoBehaviour, IDamagable
         } 
         set 
         {
-            if (Hp <= 0)
+            
+            if (hp <= 10)
             {
                 foreach (Collider col in colliders)
                 {
@@ -28,6 +29,7 @@ public class MainTarget : MonoBehaviour, IDamagable
                 GameManager.Instance.PlayableDirector.Play(GameManager.Instance.timelineClip[4]);
             }
             hp = value;
+
             //targetHpText.SetText(Hp.ToString());
             OnChangeTargetHp?.Invoke();
             

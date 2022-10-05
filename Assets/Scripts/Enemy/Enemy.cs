@@ -72,6 +72,9 @@ public class Enemy : MonoBehaviour, IDamagable
         dropItem[num].Drop(dropItemPos);
         audioSource.clip = deadSound;
         audioSource.Play();
+        //중첩 소리
+        //SoundManager.instance.Play(deadSound);
+
         //이름 뒤에 (Clone) 붙어서 에러가 난다.
         string[] tempStr = this.name.Split("(Clone)");
         ObjectPoolController.poolDic[tempStr[0]].ReturnObj(gameObject);
