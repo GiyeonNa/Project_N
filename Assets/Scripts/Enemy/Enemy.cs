@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, IDamagable
     public LayerMask layerMask;
 
     public DropItem[] dropItem;
+    public DropItems dropItems;
     public Transform dropItemPos;
 
     public AudioSource audioSource;
@@ -69,7 +70,9 @@ public class Enemy : MonoBehaviour, IDamagable
     public void Dead()
     {
         int num = Random.Range(0, dropItem.Length);
+        int tempnum = Random.Range(0, dropItems.items.Count);
         dropItem[num].Drop(dropItemPos);
+        dropItems.items[tempnum].Drop(dropItemPos);
         audioSource.clip = deadSound;
         audioSource.Play();
         //ÁßÃ¸ ¼Ò¸®

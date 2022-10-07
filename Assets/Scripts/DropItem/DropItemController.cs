@@ -13,7 +13,6 @@ public class DropItemController : MonoBehaviour,IPickUpable
         {
             case DropItem.Type.Ammo:
                 {
-                    Debug.Log("ammo : " + dropItem.amount);
                     GameManager.Instance.GunInventory.curGun.totalMagazine += dropItem.amount;
                     GameManager.Instance.GunInventory.curGun.onChangeMag?.Invoke();
                     Destroy(gameObject);
@@ -23,16 +22,16 @@ public class DropItemController : MonoBehaviour,IPickUpable
             case DropItem.Type.Food:
                 {
                     GameManager.Instance.PlayerController.Hp += dropItem.amount;
-                    Debug.Log("Food : " + dropItem.amount);
                     Destroy(gameObject);
                 }
                 break;
 
             case DropItem.Type.Money:
                 {
+
                     int resultMoney = dropItem.amount + UnityEngine.Random.Range(0,50);
+                    
                     GameManager.Instance.PlayerController.Money += resultMoney;
-                    Debug.Log("Money : " + resultMoney);
                     Destroy(gameObject);
                 }
                 break;

@@ -8,6 +8,7 @@ public class Money : DropItem
     public override void Drop(Transform transform)
     {
         //this.amount = Random.Range(25, 150);
+        //(Money)this.MemberwiseClone();
         Instantiate(prefab, transform.transform.position, transform.transform.rotation);
     }
 

@@ -957,6 +957,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cbdce3b97a2003d489de17f1c0c1d81e, type: 2}
   - {fileID: 11400000, guid: 59e5d1b08cc208445878479ca0aae335, type: 2}
   - {fileID: 11400000, guid: 82046b83c38904d47a04352807aab4d3, type: 2}
+  dropItems: {fileID: 11400000, guid: 9a511a4893126a346a71b937e631caa9, type: 2}
   dropItemPos: {fileID: 1620148589}
   audioSource: {fileID: 0}
   deadSound: {fileID: 8300000, guid: 4734b0abbd6dd0241956ef76b7254f2f, type: 3}
